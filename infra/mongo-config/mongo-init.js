@@ -3,9 +3,9 @@ db = db.getSiblingDB('admin');
 
 if (!db.getCollectionNames().includes('myCollection')) {
     // If 'mydb' doesn't exist, create it and add a collection 'myCollection'
-    print("Database 'weather-app' does not exists. Creating db");
-    db = db.getSiblingDB('weather-app');
-    db.createCollection('myCollection');
+    print("Database 'patients-db' does not exists. Creating db");
+    db = db.getSiblingDB('patients-db');
+    db.createCollection('patients-enrollment-service');
 
     // Insert data into 'myCollection' if needed
     db.myCollection.insert({
@@ -14,7 +14,7 @@ if (!db.getCollectionNames().includes('myCollection')) {
     });
 } else {
     // The database 'mydb' already exists
-    print("Database 'weather-app' already exists.");
+    print("Database 'patients-db' already exists.");
 }
 
 

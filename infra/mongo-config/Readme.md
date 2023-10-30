@@ -2,7 +2,7 @@ docker run -d --name mongodb -p 27017:27017 -v mongo-data:/data/db mongo-init
 
 kubectl create ns ns1
 d:
-cd D:\node\weather-app
+cd D:\node\patients-enrollment-service
 kubectl apply -f infra\mongo-config\storageclass.yml
 kubectl get sc
 kubectl apply -f infra\mongo-config\pv.yml

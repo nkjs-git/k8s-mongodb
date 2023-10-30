@@ -1,5 +1,5 @@
 {
-    "name": "weather-app",
+    "name": "patients-enrollment-service",
     "version": "0.0.1",
     "description": "",
     "main": "src/index.js",

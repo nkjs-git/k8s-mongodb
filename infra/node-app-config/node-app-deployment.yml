@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: node-app
-        image: weather-app:1.0.0
+        image: patients-enrollment-service:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -30,7 +30,7 @@ spec:
         - name: MONGODB_ADMINPASSWORD
           value: "password"
         - name: MONGODB_DATABASE
-          value: "weather-app"
+          value: "patients-db"
 
 ---
 apiVersion: v1
