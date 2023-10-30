@@ -1,0 +1,46 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv-1
+spec:
+  capacity:
+    storage: 0.5Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: "/run/desktop/mnt/host/d/K8S/volumes-k8s/mongo-data-1"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - docker-desktop
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongo-pv-2
+spec:
+  capacity:
+    storage: 0.5Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: "/run/desktop/mnt/host/d/K8S/volumes-k8s/mongo-data-2"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - docker-desktop

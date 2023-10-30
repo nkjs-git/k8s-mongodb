@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ns1
+  name: node-app-test
+  labels:
+    app: node-app-test
+spec:
+  # modify replicas according to your case
+  selector:
+    matchLabels:
+      app: node-app-test
+  template:
+    metadata:
+      labels:
+        app: node-app-test
+    spec:
+      containers:
+      - name: node-app-test
+        image: weather-app:1.0.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: app-port
+        env:
+        - name: MONGODB_SERVER
+          value: mongo-1.mongo-svc
+        - name: MONGODB_ADMINUSERNAME
+          value: "nkjs"
+        - name: MONGODB_ADMINPASSWORD
+          value: "password"
+        - name: MONGODB_DATABASE
+          value: "weather-app"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ns1
+  name: node-app-svc-test
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30002
+  selector:
+    app: node-app-test

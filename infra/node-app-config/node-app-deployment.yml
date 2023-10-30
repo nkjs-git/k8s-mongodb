@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ns1
+  name: node-app
+  labels:
+    app: node-app
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: node-app
+  template:
+    metadata:
+      labels:
+        app: node-app
+    spec:
+      containers:
+      - name: node-app
+        image: weather-app:1.0.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          name: app-port
+        env:
+        - name: MONGODB_SERVER
+          value: "mongo-0.mongo-svc,mongo-1.mongo-svc"
+        - name: MONGODB_ADMINUSERNAME
+          value: "nkjs"
+        - name: MONGODB_ADMINPASSWORD
+          value: "password"
+        - name: MONGODB_DATABASE
+          value: "weather-app"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: ns1
+  name: node-app-svc
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    targetPort: 8080
+    nodePort: 30001
+  selector:
+    app: node-app
